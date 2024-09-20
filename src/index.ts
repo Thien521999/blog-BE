@@ -14,7 +14,7 @@ const app = express()
 
 const port = process.env.PORT || 4000
 
-// app.use(express.json())
+app.use(express.json())
 
 // middlewares
 app.use('/users', usersRouter)

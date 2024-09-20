@@ -1,5 +1,6 @@
 import { config } from 'dotenv'
-import { Db, MongoClient } from 'mongodb'
+import { Collection, Db, MongoClient } from 'mongodb'
+import User from '~/models/schemas/User.schema'
 config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@blog.mmm7x.mongodb.net/?retryWrites=true&w=majority&appName=Blog`
@@ -18,10 +19,14 @@ class DatabaseService {
       // Send a ping to confirm a successful connection
       await this.db.command({ ping: 1 })
       console.log('Pinged your deployment. You successfully connected to MongoDB!')
-    } finally {
-      // Ensures that the client will close when you finish/error
-      await this.client.close()
+    } catch (error) {
+      console.log('error', error)
+      throw error
     }
+  }
+
+  get users(): Collection<User> {
+    return this.db.collection(process.env.DB_USERS_COLLECTION as string)
   }
 }
 
