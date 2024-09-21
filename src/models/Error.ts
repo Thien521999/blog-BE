@@ -7,7 +7,9 @@ type ErrorsType = Record<
     msg: string
     [key: string]: any
   }
-> // { [key: string]: string}
+>
+// Record<string, string> co nghia la no co dang này { [key: string]: string}, day la tien ich cua typescript
+// con Record o tren thi tuy bien khi muon tra ve gi
 
 export class ErrorWithStatus {
   message: string
@@ -21,6 +23,7 @@ export class ErrorWithStatus {
 export class EntityError extends ErrorWithStatus {
   errors: ErrorsType
   constructor({ message = USERS_MESSAGES.VALIDATION_ERROR, errors }: { message?: string; errors: ErrorsType }) {
+    // do status cho nay luon 422 , nen ko truyen vao
     super({ message, status: HTTP_STATUS.UNPROCESSABLE_ENTITY })
     this.errors = errors
   }

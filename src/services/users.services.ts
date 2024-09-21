@@ -34,8 +34,8 @@ class UsersService {
       //   }
     })
   }
-  async checkEmailExist(email: string) {
-    const user = await databaseService.users.findOne({ email })
+  async checkEmailExist(account: string) {
+    const user = await databaseService.users.findOne({ account })
     return Boolean(user)
   }
   async register(payload: RegisterReqBody) {
@@ -44,7 +44,6 @@ class UsersService {
     //   user_id: user_id.toString(),
     //   verify: userVerifyStatus.Unverified
     // })
-    console.log({ payload: payload })
     await databaseService.users.insertOne(
       new User({
         ...payload,

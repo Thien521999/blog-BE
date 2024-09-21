@@ -13,23 +13,21 @@ export const validate = (validation: RunnableValidationChains<ValidationChain>) 
     if (errors.isEmpty()) {
       return next()
     }
-    console.log('validate')
-    res.status(400).json({
-      errors: errors.mapped()
-    })
 
-    // const errorsObject = errors.mapped()
-    // const entityError = new EntityError({ errors: {} })
+    const errorsObject = errors.mapped()
+    const entityError = new EntityError({ errors: {} })
 
-    // for (const key in errorsObject) {
-    //   const { msg } = errorsObject[key]
-    //   // trả về lỗi không phải là lỗi do validate
-    //   if (msg instanceof ErrorWithStatus && msg.status !== HTTP_STATUS.UNPROCESSABLE_ENTITY) {
-    //     return next(msg)
-    //   }
-    //   entityError.errors[key] = errorsObject[key]
-    // }
+    for (const key in errorsObject) {
+      const { msg } = errorsObject[key]
+      // trả về lỗi không phải là lỗi do validate
+      if (msg instanceof ErrorWithStatus && msg.status !== HTTP_STATUS.UNPROCESSABLE_ENTITY) {
+        return next(msg)
+      }
+      entityError.errors[key] = errorsObject[key]
+    }
 
-    // next(entityError)
+    next(entityError)
   }
 }
+
+// msg instanceof ErrorWithStatus: co nghia la msg la 1 object co kieu la ErrorWithStatus

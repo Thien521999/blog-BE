@@ -58,7 +58,6 @@ export const registerValidator = validate(
         custom: {
           options: async (value) => {
             const isExistEmail = await usersService.checkEmailExist(value)
-            console.log({ isExistEmail })
             if (isExistEmail) {
               throw new Error(USERS_MESSAGES.USER_NOT_FOUND)
             }
