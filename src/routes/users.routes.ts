@@ -10,6 +10,7 @@ import {
   verifyEmailController,
   verifyForgotPasswordController
 } from '~/controllers/users.controllers'
+import { fiterMiddeware } from '~/middlewares/common.middlewares'
 import {
   accessTokenValidator,
   emailVerifyTokenValidator,
@@ -21,6 +22,7 @@ import {
   verifiedUserValidator,
   verifyForgotPasswordTokenValidator
 } from '~/middlewares/users.middlewares'
+import { UpdatedMeReqBody } from '~/models/requests/User.requests'
 import { wrapRequestHandler } from '~/utils/handler'
 
 const usersRouter = Router()
@@ -111,6 +113,7 @@ usersRouter.patch(
   accessTokenValidator,
   verifiedUserValidator,
   updateMeValidator,
+  fiterMiddeware<UpdatedMeReqBody>(['name', 'avatar']), // fiterMiddeware : dung de loc nhung body ko can thiet, ko nen update
   wrapRequestHandler(updateMeController)
 )
 
