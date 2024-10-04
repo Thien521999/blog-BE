@@ -1,10 +1,25 @@
 import { Router } from 'express'
-import { loginController, logoutController, registerController } from '~/controllers/users.controllers'
+import {
+  forgotPasswordController,
+  getMeController,
+  loginController,
+  logoutController,
+  registerController,
+  resendVerifyEmailController,
+  updateMeController,
+  verifyEmailController,
+  verifyForgotPasswordController
+} from '~/controllers/users.controllers'
 import {
   accessTokenValidator,
+  emailVerifyTokenValidator,
+  forgotPasswordValidator,
   loginValidator,
   refreshTokenValidator,
-  registerValidator
+  registerValidator,
+  updateMeValidator,
+  verifiedUserValidator,
+  verifyForgotPasswordTokenValidator
 } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handler'
 
@@ -22,7 +37,7 @@ usersRouter.post('/login', loginValidator, wrapRequestHandler(loginController))
  * Desciption. Register a new user
  * Path: /register
  * Method: POST
- * Body: {name:string, email:string, password:string, confirm_password: string, date_of_birth: ISO8601}
+ * Body: {name:string, account:string, password:string}
  */
 usersRouter.post('/register', registerValidator, wrapRequestHandler(registerController))
 
@@ -34,6 +49,70 @@ usersRouter.post('/register', registerValidator, wrapRequestHandler(registerCont
  * Body: { refresh_token: string}
  */
 usersRouter.post('/logout', accessTokenValidator, refreshTokenValidator, wrapRequestHandler(logoutController))
+
+/*
+ * Desciption. Verify email
+ * Path: /verify-email
+ * Method: POST
+ * Header: { }
+ * Body: { email_verify_token: string}
+ */
+usersRouter.post('/verify-email', emailVerifyTokenValidator, wrapRequestHandler(verifyEmailController))
+
+/*
+ * Desciption. Resend verify email
+ * Path: /resend-verify-email
+ * Method: POST
+ * Header: { Authorization: Bearer <access_token> }
+ * Body: {}
+ */
+usersRouter.post('/resend-verify-email', accessTokenValidator, wrapRequestHandler(resendVerifyEmailController))
+
+/*
+ * Desciption. Forgot Password
+ * Path: /forgot-password
+ * Method: POST
+ * Header: { }
+ * Body: {account: string}
+ */
+usersRouter.post('/forgot-password', forgotPasswordValidator, wrapRequestHandler(forgotPasswordController))
+
+/*
+ * Desciption. Verify link in email to reset password
+ * Path: /verify-forgot-password
+ * Method: POST
+ * Header: { forgot_password_token: string }
+ * Body: {}
+ */
+usersRouter.post(
+  '/verify-forgot-password',
+  verifyForgotPasswordTokenValidator,
+  wrapRequestHandler(verifyForgotPasswordController)
+)
+
+/*
+ * Desciption. Get user
+ * Path: /me
+ * Method: POST
+ * Header: {}
+ * Body: {}
+ */
+usersRouter.get('/me', accessTokenValidator, wrapRequestHandler(getMeController))
+
+/*
+ * Desciption. Update my profile
+ * Path: /me
+ * Method: PATCH
+ * Header: { Authorization: Bearer <access_token> }
+ * Body: UserSchema
+ */
+usersRouter.patch(
+  '/me',
+  accessTokenValidator,
+  verifiedUserValidator,
+  updateMeValidator,
+  wrapRequestHandler(updateMeController)
+)
 
 export default usersRouter
 // TSError: ⨯ Unable to compile TypeScript:

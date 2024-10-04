@@ -13,7 +13,7 @@ Nếu ko dùng `next` thì ko cần khai báo cũng dc
 - Gọi `next()` để chuyển request sang request handler tiếp theo
 - Gọi `next(err)` để chuyển request sang error handler tiếp theo
 
-Khi xảy ra lỗi trong synchronous handler thì tự động sẽ được chuyển sang error handler => có nghĩa là
+Khi xảy ra lỗi trong synchronous(đồng bộ) handler thì tự động sẽ được chuyển sang error handler => có nghĩa là
  khi          ``next(new Error('Loi rui ban'))``
  tương đương  ``throw new Error('Loi rui ban)``
 ``Nhớ là chỉ synchronous thui nha, async no gay ra loi``
@@ -33,3 +33,11 @@ Nếu chỉ khai báo 3 tham số là request handler
 
 
 ```
+
+### updateOne and findOneAndUpdate
+
+- `updateOne`: chi update ko tra ve document
+
+- `findOneAndUpdate`:
+    + update va tra ve document,
+    + mac dinh `findOneAndUpdate` tra ve document cũ, muốn trả về mới thêm returnDocument: 'after',
