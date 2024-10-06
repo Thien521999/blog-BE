@@ -1,5 +1,6 @@
 import { config } from 'dotenv'
 import { Collection, Db, MongoClient } from 'mongodb'
+import Category from '~/models/schemas/Category.schema'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
 import User from '~/models/schemas/User.schema'
 config()
@@ -31,6 +32,9 @@ class DatabaseService {
   }
   get refreshToken(): Collection<RefreshToken> {
     return this.db.collection(process.env.DB_REFRESH_TOKENS_COLLECTION as string)
+  }
+  get category(): Collection<Category> {
+    return this.db.collection(process.env.DB_CATEGORY_COLLECTION as string)
   }
 }
 

@@ -5,6 +5,7 @@ import { userVerifyStatus } from '~/constants/enums'
 import HTTP_STATUS from '~/constants/httpStatus'
 import { USERS_MESSAGES } from '~/constants/messages'
 import {
+  ChangePasswordReqBody,
   ForgotPasswordReqBody,
   LoginReqBody,
   RegisterReqBody,
@@ -140,4 +141,16 @@ export const updateMeController = async (
     message: USERS_MESSAGES.UPDATE_ME_SUCCESS,
     result: user
   })
+}
+
+export const changePasswordController = async (
+  req: Request<ParamsDictionary, any, ChangePasswordReqBody>,
+  res: Response,
+  next: NextFunction
+) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const { password } = req.body
+  const result = await usersService.changePassword(user_id, password)
+
+  return res.json(result)
 }

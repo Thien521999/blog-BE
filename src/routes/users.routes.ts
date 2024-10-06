@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import {
+  changePasswordController,
   forgotPasswordController,
   getMeController,
   loginController,
@@ -13,6 +14,7 @@ import {
 import { fiterMiddeware } from '~/middlewares/common.middlewares'
 import {
   accessTokenValidator,
+  changePasswordMeValidator,
   emailVerifyTokenValidator,
   forgotPasswordValidator,
   loginValidator,
@@ -113,8 +115,23 @@ usersRouter.patch(
   accessTokenValidator,
   verifiedUserValidator,
   updateMeValidator,
-  fiterMiddeware<UpdatedMeReqBody>(['name', 'avatar']), // fiterMiddeware : dung de loc nhung body ko can thiet, ko nen update
+  fiterMiddeware<UpdatedMeReqBody>(['name', 'avatar']), // fiterMiddeware : dung de loc nhung body ko can thiet,body ko can the ko can thiet update
   wrapRequestHandler(updateMeController)
+)
+
+/*
+ * Desciption. Change password
+ * Path: /change-password
+ * Method: PUT
+ * Header: { Authorization: Bearer <access_token> }
+ * Body: {old_password: string, password: string, confirm_password: string}
+ */
+usersRouter.put(
+  '/change-password',
+  accessTokenValidator,
+  verifiedUserValidator,
+  changePasswordMeValidator,
+  wrapRequestHandler(changePasswordController)
 )
 
 export default usersRouter

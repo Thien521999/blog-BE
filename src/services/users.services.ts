@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 import { ObjectId } from 'mongodb'
 import { TokenType, userVerifyStatus } from '~/constants/enums'
-import { LoginReqBody, RegisterReqBody, UpdatedMeReqBody } from '~/models/requests/User.requests'
+import { ChangePasswordReqBody, LoginReqBody, RegisterReqBody, UpdatedMeReqBody } from '~/models/requests/User.requests'
 import User from '~/models/schemas/User.schema'
 import { hashPassword } from '~/utils/crypto'
 import { signToken, verifyToken } from '~/utils/jwt'
@@ -263,7 +263,26 @@ class UsersService {
       }
     )
 
-    return user
+    return User
+  }
+  async changePassword(user_id: string, new_password: string) {
+    await databaseService.users.updateOne(
+      {
+        _id: new ObjectId(user_id)
+      },
+      {
+        $set: {
+          password: hashPassword(new_password)
+        },
+        $currentDate: {
+          updated_at: true
+        }
+      }
+    )
+
+    return {
+      message: USERS_MESSAGES.CHANGE_PASSWORD_SUCCESS
+    }
   }
 }
 

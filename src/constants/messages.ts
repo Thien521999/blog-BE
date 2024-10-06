@@ -3,6 +3,7 @@ export const USERS_MESSAGES = {
   NAME_IS_REQUIRED: 'Name is required',
   NAME_MUST_BE_A_STRING: 'Name must be a string',
   NAME_LENGTH_MUST_BE_FROM_1_TO_100: 'Name length must be from 1 to 100',
+  NAME_LENGTH_MUST_BE_FROM_1_TO_50: 'Name length must be from 1 to 50',
   EMAIL_ALREADY_EXISTS: 'Email already exists',
   EMAIL_IS_REQUIRED: 'Email is required',
   EMAIL_IS_INVALID: 'Email is invalid',
@@ -82,3 +83,16 @@ export const BOOKMARK_MESSAGES = {
   BOOKMARK_SUCCESSFULLY: 'Bookmark successfully',
   UNBOOKMARK_SUCCESSFULLY: 'Unbookmark successfully'
 } as const
+
+export const CATEGORY_MESSAGES = {
+  CATEGORY_SUCCESSFULLY: 'Create category successfully',
+  CATEGORY_ALREADY_EXISTS: 'Category already exists',
+  GET_LIST_CATEGORY_SUCCESS: 'Get category list success',
+  GET_CATEGORY_DETAIL_SUCCESS: 'Get category detail success',
+  UPDATE_CATEGORY_DETAIL_SUCCESS: 'Update category success',
+  CATEGORY_NOT_FOUND: 'Category not found',
+  DELETE_CATEGORY_SUCCESS: 'Delete category success',
+  INVALID_CATEGORY_ID: 'Invalid category id',
+  CATEGORY_NAME_INVALID: 'Category name invalid',
+  CATEGORY_NAME_EXISTED: 'Category name existed'
+}

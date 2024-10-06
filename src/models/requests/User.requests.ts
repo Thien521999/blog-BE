@@ -33,3 +33,7 @@ export interface UpdatedMeReqBody {
   name?: string
   avatar?: string
 }
+
+export interface ChangePasswordReqBody {
+  password: string
+}

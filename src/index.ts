@@ -3,6 +3,7 @@ import express from 'express'
 import { defaultErrorHandler } from './middlewares/error.middlewares'
 import usersRouter from './routes/users.routes'
 import databaseService from './services/database.services'
+import categoryRouter from './routes/category.routes'
 dotenv.config()
 
 databaseService.connect().then(() => {
@@ -19,6 +20,7 @@ app.use(express.json())
 
 // middlewares
 app.use('/users', usersRouter)
+app.use('/category', categoryRouter)
 
 app.use(defaultErrorHandler)
 

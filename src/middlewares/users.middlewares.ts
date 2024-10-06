@@ -57,6 +57,31 @@ const passwordSchema: ParamSchema = {
     errorMessage: USERS_MESSAGES.PASSWORD_MUST_BE_STRONG
   }
 }
+const confirmPasswordSchema: ParamSchema = {
+  notEmpty: {
+    errorMessage: USERS_MESSAGES.PASSWORD_IS_REQUIRED
+  },
+  isString: {
+    errorMessage: USERS_MESSAGES.PASSWORD_MUST_BE_A_STRING
+  },
+  isLength: {
+    options: {
+      min: 6,
+      max: 50
+    },
+    errorMessage: USERS_MESSAGES.PASSWORD_LENGTH_MUST_BE_FROM_6_TO_50
+  },
+  isStrongPassword: {
+    options: {
+      minLength: 6,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1
+    },
+    errorMessage: USERS_MESSAGES.PASSWORD_MUST_BE_STRONG
+  }
+}
 
 const imageSchema: ParamSchema = {
   optional: true,
@@ -359,6 +384,41 @@ export const updateMeValidator = validate(
     {
       name: { ...nameSchema, optional: true, notEmpty: undefined },
       avatar: imageSchema
+    },
+    ['body']
+  )
+)
+
+export const changePasswordMeValidator = validate(
+  checkSchema(
+    {
+      old_password: {
+        ...passwordSchema,
+        custom: {
+          options: async (value: string, { req }) => {
+            const { user_id } = req.decoded_authorization as TokenPayload
+            const user = await databaseService.users.findOne({ _id: new ObjectId(user_id) })
+
+            if (!user) {
+              throw new ErrorWithStatus({
+                message: USERS_MESSAGES.USER_NOT_FOUND,
+                status: HTTP_STATUS.UNAUTHORIZED
+              })
+            }
+
+            const { password } = user
+            const isMatch = hashPassword(value) === password
+            if (!isMatch) {
+              throw new ErrorWithStatus({
+                message: USERS_MESSAGES.OLD_PASSWORD_NOT_MATCH,
+                status: HTTP_STATUS.UNAUTHORIZED
+              })
+            }
+          }
+        }
+      },
+      password: passwordSchema,
+      confirm_password: confirmPasswordSchema
     },
     ['body']
   )
