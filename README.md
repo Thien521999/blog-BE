@@ -41,3 +41,13 @@ Nếu chỉ khai báo 3 tham số là request handler
 - `findOneAndUpdate`:
     + update va tra ve document,
     + mac dinh `findOneAndUpdate` tra ve document cũ, muốn trả về mới thêm returnDocument: 'after',
+
+### formidable
+
+- là một thư viện trong Node.js được sử dụng chủ yếu để xử lý việc tải tệp lên (file uploads). Nó hỗ trợ các tính năng sau:
+
+- Tải tệp lên từ biểu mẫu (form uploads): formidable cho phép bạn dễ dàng xử lý các biểu mẫu có chứa tệp tin tải lên, mà không cần phải tự mình xử lý các luồng dữ liệu từ phía client.
+
+- Xử lý nhiều loại dữ liệu: Ngoài việc tải tệp, formidable cũng hỗ trợ việc phân tích dữ liệu từ các biểu mẫu gửi đi bằng các phương thức HTTP như POST, PUT.
+
+- Xử lý dữ liệu dưới dạng multipart/form-data: Đây là định dạng thường được dùng khi bạn cần tải tệp tin cùng với dữ liệu khác từ phía người dùng.
