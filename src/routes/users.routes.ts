@@ -5,6 +5,7 @@ import {
   getMeController,
   loginController,
   logoutController,
+  refreshTokenController,
   registerController,
   resendVerifyEmailController,
   updateMeController,
@@ -46,11 +47,19 @@ usersRouter.post('/login', loginValidator, wrapRequestHandler(loginController))
 usersRouter.post('/register', registerValidator, wrapRequestHandler(registerController))
 
 /*
+ * Desciption. Refresh Token
+ * Path: /refresh-token
+ * Method: POST
+ * Header: { refresh_token: string }
+ */
+usersRouter.post('/refresh-token', refreshTokenValidator, wrapRequestHandler(refreshTokenController))
+
+/*
  * Desciption. Logout a user
  * Path: /logout
  * Method: POST
  * Header: { Authorization: Bearer <access_token> }
- * Body: { refresh_token: string}
+ * Body: { refresh_token: string} // refresh_token de xoa trong db
  */
 usersRouter.post('/logout', accessTokenValidator, refreshTokenValidator, wrapRequestHandler(logoutController))
 

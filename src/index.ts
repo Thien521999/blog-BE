@@ -8,9 +8,10 @@ import mediasRouter from './routes/medias.routes'
 dotenv.config()
 
 databaseService.connect().then(() => {
-  //   databaseService.indexUsers()
-  //   databaseService.indexRefreshTokens()
-  //   databaseService.indexFollowers()
+  // index khi connect DB xong
+  databaseService.indexUsers()
+  databaseService.indexRefreshTokens()
+  databaseService.indexCategory()
 })
 
 const app = express()

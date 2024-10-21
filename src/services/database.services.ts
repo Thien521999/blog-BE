@@ -27,6 +27,29 @@ class DatabaseService {
     }
   }
 
+  async indexUsers() {
+    const exists = await this.users.indexExists(['account_1', 'account_1_password_1'])
+    if (!exists) {
+      this.users.createIndex({ account: 1 }, { unique: true })
+      this.users.createIndex({ account: 1, password: 1 }, { unique: true })
+    }
+  }
+
+  async indexRefreshTokens() {
+    const exists = await this.refreshToken.indexExists(['token_1', 'exp_1'])
+    if (!exists) {
+      this.refreshToken.createIndex({ token: 1 }, { unique: true })
+      this.refreshToken.createIndex({ exp: 1 }, { expireAfterSeconds: 0 })
+    }
+  }
+
+  async indexCategory() {
+    const exists = await this.category.indexExists(['name_1'])
+    if (!exists) {
+      this.category.createIndex({ name: 1 }, { unique: true })
+    }
+  }
+
   get users(): Collection<User> {
     return this.db.collection(process.env.DB_USERS_COLLECTION as string)
   }
