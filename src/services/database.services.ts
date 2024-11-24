@@ -1,8 +1,10 @@
 import { config } from 'dotenv'
 import { Collection, Db, MongoClient } from 'mongodb'
+import Blog from '~/models/schemas/Blog.schema'
 import Category from '~/models/schemas/Category.schema'
 import RefreshToken from '~/models/schemas/RefreshToken.schema'
 import User from '~/models/schemas/User.schema'
+import Comment from '~/models/schemas/Comment.schema'
 config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@blog.mmm7x.mongodb.net/?retryWrites=true&w=majority&appName=Blog`
@@ -58,6 +60,12 @@ class DatabaseService {
   }
   get category(): Collection<Category> {
     return this.db.collection(process.env.DB_CATEGORY_COLLECTION as string)
+  }
+  get blog(): Collection<Blog> {
+    return this.db.collection(process.env.DB_BLOG_COLLECTION as string)
+  }
+  get comment(): Collection<Comment> {
+    return this.db.collection(process.env.DB_COMMENT_COLLECTION as string)
   }
 }
 

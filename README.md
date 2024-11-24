@@ -105,3 +105,88 @@ Nếu chỉ khai báo 3 tham số là request handler
     - Phân tích câu truy vấn với `explain`
     - Dùng MongoDB Driver lúc naò cũng nhanh hơn các ODM(ORM) như Mongose, Prisma vì nó bỏ qua lớp ảo hoá và truy vấn trực tiếp vào database.
     - Để server MongoDB gần với Server của bạn nhất có thể.
+
+### So sánh req.header và req.headers
+
+- req.header: header trong BE ko phân biệt chữ hoa chữ thường (req.header('Authorization') = req.header('authorization'))
+- req.headers: trong javascript có phân biệt chữ hoa chữ thường(req.headers.authorization = hợp lệ)
+
+
+### Aggregation Pipelines
+
+- là một công cụ mạnh mẽ để xử lý dữ liệu trong MongoDB. Nó cho phép bạn thực hiện các phép tính toán, biến đổi và tổng hợp dữ liệu từ nhiều bảng khác nhau một cách hiệu quả.
+- Aggregation operations: là các phép toán để xử lý dữ liệu.
+- Aggregation pipelines: là một chuỗi các bước để xử lý dữ liệu.
+- Cú pháp: db.collection.aggregate([{stage1}, {stage2}, ...])
+- Các stage thường dùng: `$match`, `$group`, `$project`, `$sort`, `$limit`, `$skip`, `$unwind`, `$lookup`, `$out`, `$addFields`, `$replaceRoot`, `$count`
+- `$match`: lọc dữ liệu dựa trên các điều kiện.
+- `$group`: nhóm dữ liệu dựa trên các tiêu chí.
+- `$project`: chọn lọc các trường cần thiết.
+- `$sort`: sắp xếp dữ liệu.
+- `$limit`: giới hạn số lượng dữ liệu trả về.
+- `$skip`: bỏ qua một số lượng dữ liệu đầu tiên.
+- `$unwind`: phân tán mảng thành các phần tử riêng lẻ.
+- `$lookup`: kết hợp dữ liệu từ các collections khác.
+- `$addFields`: thêm trường mới vào dữ liệu.
+- `$count`: đếm số lượng dữ liệu.
+- `$size`: trả về số lượng phần tử trong mảng.
+- `$map`: ánh xạ dữ liệu.
+- `$array`: lấy phần tử từ mảng.
+- `$reduce`: giảm dữ liệu.
+- `$filter`: lọc dữ liệu.
+- `$set`: gán giá trị.
+- `$unset`: xóa trường.
+- `$in`: kiểm tra xem giá trị có nằm trong mảng hay không.
+
+
+- `$out`: lưu kết quả vào một collection mới.
+- `$replaceRoot`: thay thế cấu trúc dữ liệu.
+- `$bucket`: nhóm dữ liệu thành các bucket dựa trên các trường.
+- `$bucketAuto`: nhóm dữ liệu thành các bucket tự động dựa trên các trường.
+- `$sortByCount`: sắp xếp dữ liệu theo số lượng và trả về kết quả.
+- `$first`, `$last`: trả về phần tử đầu tiên, cuối cùng trong mảng.
+- `$addToSet`: thêm phần tử vào mảng nếu nó không tồn tại.
+- `$push`: thêm phần tử vào mảng.
+- `$pull`: xóa phần tử khỏi mảng.
+- `$accumulator`: tích lũy dữ liệu.
+- `$size`: trả về số lượng phần tử trong mảng.
+- `$zip`: kết hợp các mảng.
+- `$zipCode`: kết hợp các mảng với mã code.
+- `$mergeObjects`: hợp nhất các đối tượng.
+- `$mergeArrays`: hợp nhất các mảng.
+- `$objectToArray`: chuyển đổi đối tượng thành mảng.
+- `$arrayToObject`: chuyển đổi mảng thành đối tượng.
+- `$literal`: trả về giá trị nguyên bản.
+- `$date`: trả về giá trị ngày tháng.
+- `$toDouble`: chuyển đổi giá trị thành số thực.
+- `$toString`: chuyển đổi giá trị thành chuỗi.
+- `$toInt`: chuyển đổi giá trị thành số nguyên.
+- `$toLong`: chuyển đổi giá trị thành số nguyên lớn.
+- `$toObjectId`: chuyển đổi giá trị thành ObjectId.
+- `$literal`: trả về giá trị nguyên bản.
+- `$ifNull`: trả về giá trị nếu null.
+- `$cond`: trả về giá trị dựa trên điều kiện.
+- `$switch`: trả về giá trị dựa trên nhiều điều kiện.
+- `$rand`: trả về giá trị ngẫu nhiên.
+- `$sample`: trả về một mảng ngẫu nhiên.
+- `$merge`: hợp nhất các đối tượng.
+- `$mergeObjects`: hợp nhất các đối tượng.
+- `$mergeArrays`: hợp nhất các mảng.
+- `$objectToArray`: chuyển đổi đối tượng thành mảng.
+- `$arrayToObject`: chuyển đổi mảng thành đối tượng.
+- `$replaceRoot`: thay thế cấu trúc dữ liệu.
+- `$replaceField`: thay thế trường.
+- `$replaceWith`: thay thế giá trị.
+- `$literal`: trả về giá trị nguyên bản.
+- `$size`: trả về số lượng phần tử trong mảng.
+- `$zip`: kết hợp các mảng.
+- `$zipCode`: kết hợp các mảng với mã code.
+- `$date`: trả về giá trị ngày tháng.
+- `$dateAdd`: thêm ngày tháng.
+- `$dateDiff`: tính khoảng cách ngày tháng.
+- `$dateTrunc`: cắt ngày tháng.
+- `$indexOfArray`: trả về vị trí của phần tử trong mảng.
+- `$isArray`: kiểm tra xem giá trị có phải là mảng hay không.
+- `$mergeObjects`: hợp nhất các đối tượng.
+
+# Khi phân trang trong Aggregation cần để `$skip` trước `$limit`

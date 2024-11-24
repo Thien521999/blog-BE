@@ -21,3 +21,36 @@ interface User {
     verify?: userVerifyStatus
 }
 ```
+
+```ts
+interface blog {
+  _id?: ObjectId
+  user_id: ObjectId
+  title: string
+  content: string
+  description: string
+  thumbnail: string
+  category: string
+  category_id: ObjectId
+}
+```
+
+```ts
+interface CategoryType {
+  _id?: ObjectId
+  name: string
+  user_id: ObjectId
+}
+```
+
+```ts
+interface CommentType {
+  _id?: ObjectId
+  user_id: ObjectId
+  blog_id: ObjectId
+  blog_user_id: ObjectId
+  content: string
+  replyCM: ObjectId[]
+  // reply_user: ObjectId
+}
+```

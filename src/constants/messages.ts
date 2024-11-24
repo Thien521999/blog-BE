@@ -96,3 +96,36 @@ export const CATEGORY_MESSAGES = {
   CATEGORY_NAME_INVALID: 'Category name invalid',
   CATEGORY_NAME_EXISTED: 'Category name existed'
 }
+
+export const BLOG_MESSAGES = {
+  BLOG_SUCCESSFULLY: 'Blog successfully',
+  BLOG_ALREADY_EXISTS: 'Blog already exists',
+  TITTLE_IS_REQUIRED: 'Tittle is required',
+  TITTLE_MUST_BE_A_STRING: 'Tittle must be a string',
+  TITTLE_LENGTH_MUST_BE_FROM_10_TO_50: 'Tittle length must be from 10 to 50',
+  CONTENT_IS_REQUIRED: 'Content is required',
+  CONTENT_MUST_BE_A_STRING: 'Content must be a string',
+  CONTENT_LENGTH_MUST_BE_FROM_200_TO_3000: 'CONTENT LENGTH MUST BE FROM 200 TO 3000',
+  DESCRIPTION_IS_REQUIRED: 'Description is required',
+  DESCRIPTION_MUST_BE_A_STRING: 'Description must be a string',
+  DESCRIPTION_LENGTH_MUST_BE_FROM_50_TO_200: 'Description length must be from 50 to 200',
+  INVALID_CATEGORY_ID: 'Invalid category id',
+  CATEGORY_NOT_FOUND: 'Category not found',
+  GET_LIST_BLOG_SUCCESS: 'Get list blog success',
+  BLOG_NOT_FOUND: 'Blog not found',
+  INVALID_BLOG_ID: 'Invalid blog id',
+  GET_BLOG_DETAIL_SUCCESS: 'Get blog detail success',
+  GET_BLOG_BY_USER_ID_SUCCESS: 'Get blog by user id success'
+}
+
+export const COMMENT_MESSAGES = {
+  CREATE_COMMENT_SUCCESS: 'Create comment successfully',
+  CONTENT_IS_REQUIRED: 'Content is required',
+  CONTENT_MUST_BE_A_STRING: 'Content must be a string',
+  CONTENT_LENGTH_MUST_BE_FROM_1_TO_3000: 'Content length must be from 1 to 3000',
+  BLOG_ID_IS_REQUIRED: 'Blog id is required',
+  BLOG_AUTHOR_ID_IS_REQUIRED: 'Blog author id is required',
+  REPLY_CM_MUST_BE_AN_ARRAY: 'Reply cm must be an array',
+  GET_COMMENT_SUCCESS: 'Get comment success',
+  REPLY_COMMENT_SUCCESS: 'Reply comment success'
+}

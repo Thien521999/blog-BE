@@ -5,6 +5,8 @@ import usersRouter from './routes/users.routes'
 import databaseService from './services/database.services'
 import categoryRouter from './routes/category.routes'
 import mediasRouter from './routes/medias.routes'
+import blogRouter from './routes/blog.router'
+import commentRouter from './routes/comment.routes'
 dotenv.config()
 
 databaseService.connect().then(() => {
@@ -24,6 +26,8 @@ app.use(express.json())
 app.use('/users', usersRouter)
 app.use('/category', categoryRouter)
 app.use('/medias', mediasRouter)
+app.use('/blog', blogRouter)
+app.use('/comment', commentRouter)
 
 app.use(defaultErrorHandler)
 
